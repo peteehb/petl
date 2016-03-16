@@ -32,18 +32,18 @@ class CSVView(Table):
         # ascii
         if codec.name == 'ascii':
             # bypass encoding
-            with self.source.open('rU') as csvfile:
-                reader = csv.reader(csvfile, **self.csvargs)
-                for row in reader:
-                    yield tuple(row)
+            csvfile = self.source.open('rU'):
+            reader = csv.reader(csvfile, **self.csvargs)
+            for row in reader:
+                yield tuple(row)
 
         # non-ascii
         else:
-            with self.source.open('rb') as buf:
-                reader = UnicodeReader(buf, encoding=self.encoding,
+            buf = self.source.open('rb')
+            reader = UnicodeReader(buf, encoding=self.encoding,
                                        errors=self.errors, **self.csvargs)
-                for row in reader:
-                    yield tuple(row)
+            for row in reader:
+                yield tuple(row)
 
 
 def tocsv_impl(table, source, **kwargs):

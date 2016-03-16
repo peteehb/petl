@@ -32,7 +32,7 @@ class CSVView(Table):
         # ascii
         if codec.name == 'ascii':
             # bypass encoding
-            csvfile = self.source.open('rU')
+            csvfile = self.source.read()
             reader = csv.reader(csvfile, **self.csvargs)
             for row in reader:
                 yield tuple(row)

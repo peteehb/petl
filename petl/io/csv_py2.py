@@ -38,8 +38,7 @@ class CSVView(Table):
 
         # non-ascii
         else:
-            buf = self.source.open('rb')
-            reader = UnicodeReader(buf, encoding=self.encoding,
+            reader = UnicodeReader(self.source, encoding=self.encoding,
                                        errors=self.errors, **self.csvargs)
             for row in reader:
                 yield tuple(row)
